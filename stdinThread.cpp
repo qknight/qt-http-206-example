@@ -1,4 +1,6 @@
 #include "stdinThread.h"
+#include <QCoreApplication>
+
 
 void stdinThread::doWork() {
 
@@ -15,10 +17,15 @@ void stdinThread::doWork() {
         qDebug() << "you typed: " << s;
 
         if (s == "q") {
-            emit myquit();
+            // FIXME why does this work
+            QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
+            // but not this (with the upper line commented and the below uncommented?)
+//             QObject::connect (&stdinthread, SIGNAL(myquit()), &a, SLOT(quit()));
+            break;
         }
         if (s == "c") {
             emit mycancel();
         }
     }
+    qDebug() << "input handling exited";
 }

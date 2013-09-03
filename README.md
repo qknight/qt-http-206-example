@@ -1,14 +1,9 @@
-what is this
-============
-
+# what is this
 qt-http-206-example is a little example featuring how to do partial content 206 http downloads using QNetworkAccessManager
-
 this code is a bit hacky, so pick what you need.
 
 
-
-running the code
-================
+# running the code
 ./qt-http-206-example
 
 'q', then RETURN or CTRL+C to exit immediately; 'c' then RETURN to cancel further downloads 
@@ -29,10 +24,7 @@ you typed:  "q"
 NetGet::cancelDownload() called 
 
 
-
-license
-=======
-
+# license
 this codebase is licensed - WTFPL – Do What the Fuck You Want to Public License -> http://www.wtfpl.net/
 
 

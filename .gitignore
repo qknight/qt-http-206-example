@@ -1,0 +1,9 @@
+moc_*
+*~
+.kdev4
+*.swp
+.gitignore
+*.o
+*.kdev4
+Makefile
+qt-http-206-example
