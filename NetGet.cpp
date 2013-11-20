@@ -15,9 +15,17 @@ NetGet::NetGet(QObject* parent) : QObject(parent) {
     emit createRequestSig();
 }
 
+
+NetGet::~NetGet() {
+    qDebug() << __FUNCTION__;
+    delete manager;
+}
+
+
 void NetGet::printShortcuts() {
     qDebug() << "'q', then RETURN or CTRL+C to exit immediately; 'c' then RETURN to cancel further downloads";
 }
+
 
 void NetGet::createRequestSlot() {
     if (m_createRequests) {
@@ -38,14 +46,17 @@ void NetGet::createRequestSlot() {
     }
 }
 
+
 void NetGet::cancelDownload() {
     m_createRequests=false;
     qDebug() << "NetGet::cancelDownload() called";
     int i = 0;
     foreach(QNetworkReply* rp, requests) {
         rp->abort();
+        delete rp;
         qDebug() << "canceling request " << i++;
     }
+    requests.clear();
     printShortcuts();
 }
 

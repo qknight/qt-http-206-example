@@ -11,16 +11,16 @@ void stdinThread::doWork() {
 
     in.open(stdin, QIODevice::ReadOnly);
     QTextStream ts(&in);
+    connect(this, SIGNAL(myquit()), QCoreApplication::instance(), SLOT(quit()));
 
     while (true) {
         ts >> s;
         qDebug() << "you typed: " << s;
 
         if (s == "q") {
-            // FIXME why does this work
-            QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
-            // but not this (with the upper line commented and the below uncommented?)
-//             QObject::connect (&stdinthread, SIGNAL(myquit()), &a, SLOT(quit()));
+            emit myquit();
+//             QCoreApplication::instance()->quit();
+//             QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);
             break;
         }
         if (s == "c") {

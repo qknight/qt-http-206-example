@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QThread>
 
+
 #include "stdinThread.h"
 #include "NetGet.h"
 
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     NetGet ng;
 
+
+    
     qDebug() << ">> this example will download something defined in NetGet.cpp (if network is working) <<";
 
     QThread* workerThread1 = new QThread;
@@ -25,6 +28,7 @@ int main(int argc, char *argv[])
 
     QObject::connect (&stdinthread, SIGNAL(mycancel()), &ng, SLOT(cancelDownload()));
     QObject::connect (&stdinthread, SIGNAL(myquit()), &a, SLOT(quit()));
+    QObject::connect (&a, SIGNAL(aboutToQuit()), &ng, SLOT(cancelDownload()));
 
     stdinthread.moveToThread(workerThread1);
 

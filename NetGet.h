@@ -10,12 +10,14 @@
 #include <QObject>
 #include <QUrl>
 #include <QVector>
+#include <QHostInfo>
 
 
 class NetGet : public QObject {
     Q_OBJECT
 public:
     NetGet(QObject* parent = 0);
+    ~NetGet();
     void printShortcuts();
 signals:
     void createRequestSig();
